@@ -6,11 +6,12 @@ public static class SelfTest
 {
     public static async Task<int> RunAsync()
     {
-        var directory = Path.Combine(Path.GetTempPath(), "RefrigerationHmi-tests", Guid.NewGuid().ToString("N"));
-        Directory.CreateDirectory(directory);
+        var testRoot = Environment.GetEnvironmentVariable("REFRIGERATION_HMI_TEST_ROOT") ?? Path.GetTempPath();
+        var directory = Path.Combine(testRoot, "RefrigerationHmi-tests-" + Guid.NewGuid().ToString("N"));
         var lines = new List<string>();
         try
         {
+            Directory.CreateDirectory(directory);
             var settings = new Settings();
             var repository = new Repository(Path.Combine(directory, "test.db"));
             var engine = new AlarmEngine();
@@ -106,7 +107,7 @@ public static class SelfTest
             Check(storage.StorageError.Length > 0 && damagedRepo.Count() == 0 && !storageService.Running, "数据库故障明确上报并停止采集");
             await CheckSimulatorUiThreadAsync();
             Check(true, "WinForms UI 线程启动、读取与停止 TCP 模拟器不死锁");
-            lines.Add($"PASS {lines.Count} checks. Test data: {directory}");
+            lines.Add($"PASS {lines.Count} checks. Test data stays in a local temporary directory.");
             WriteReport(lines);
             return 0;
         }

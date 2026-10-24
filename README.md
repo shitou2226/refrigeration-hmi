@@ -14,7 +14,9 @@
 
 ## 跑起来
 
-需要 Windows 10/11 和 [.NET 9 SDK](https://dotnet.microsoft.com/download/dotnet/9.0)。下载源码后，在项目目录打开 PowerShell：
+直接试用：[下载 Windows x64 便携包](https://github.com/shitou2226/refrigeration-hmi/releases/download/v0.1.0-preview.1/RefrigerationHmi-0.1.0-preview.1-win-x64.zip)。完整解压，双击 `RefrigerationHmi.exe`。包内自带运行时，不用安装 SDK。首次启动会进入模拟采集，[按这几步试一遍](docs/quick-start.md)。
+
+从源码运行需要 Windows 10/11 和 [.NET 9 SDK](https://dotnet.microsoft.com/download/dotnet/9.0)，在项目目录打开 PowerShell：
 
 ```powershell
 dotnet run --project .\RefrigerationHmi.csproj -c Release
@@ -29,6 +31,8 @@ dotnet run --project .\RefrigerationHmi.csproj -c Release
 ```
 
 生成后双击 `启动制冷上位机.cmd`，或运行 `dist\RefrigerationHmi.exe`。需要保留整个 `dist` 文件夹；换到其他电脑运行时，需要 .NET 9 Windows Desktop Runtime x64。
+
+要制作与 Release 相同的自包含便携包，使用 PowerShell 7.4 或更新版本执行 `./scripts/build-portable.ps1`。脚本按锁文件还原依赖，附带许可证，生成校验清单，并在重新解压的目录运行 19 项自检。构建产物保存在 `artifacts/releases/`。
 
 首次启动会自动建库并开始模拟采集。趋势从启动后的采集记录开始画，约两分钟填满窗口。
 
@@ -122,3 +126,8 @@ Get-Content .\dist\self-test-results.txt
 ## 许可
 
 项目源码采用 [MIT 许可](LICENSE)。依赖通过 NuGet 还原，许可信息见 [第三方说明](THIRD_PARTY_NOTICES.md)。
+
+
+## 试用与相关项目
+
+[试用步骤](docs/try-it.md) · [反馈问题](https://github.com/shitou2226/refrigeration-hmi/issues/new/choose) · [其他电气与工业软件项目](docs/related-projects.md)

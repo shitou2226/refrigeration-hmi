@@ -12,4 +12,4 @@ The repository contains project source and screenshots of the running applicatio
 |SQLitePCLRaw.provider.e_sqlite3|2.1.12|Apache-2.0|
 |System.Memory|4.5.3|MIT|
 
-The .NET SDK and Windows Desktop Runtime are provided by Microsoft and are not included in this repository. Refer to each package's NuGet metadata and upstream license for its full terms.
+The .NET SDK and Windows Desktop Runtime are provided by Microsoft and are not included in the source repository. The self-contained Windows release includes the Windows Desktop Runtime and the original dependency/runtime license files under `licenses/`. Refer to those files and each package's upstream license for the full terms.
